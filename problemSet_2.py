@@ -64,27 +64,33 @@ try:
     def plates():
         userInput = input("Plate: ")
 
+        def zeroCheck(number):
+            if "0" in number:
+                zero = number.find("0")
+                for char in number:
+                    if char.isdigit():
+                        if zero <= number.index(char):
+                            return False
+                        return True
+            return True
+
+        def middle(mid):
+            for number in mid:
+                if number.isdigit():
+                    lastChar = mid[len(mid) - 1]
+                    if lastChar.isdigit():
+                        return zeroCheck(mid)
+                    else:
+                        return False
+            else:
+                return zeroCheck(mid)
+
         def is_valid(plate):
             for char in plate:
                 if char in string.punctuation:
                     return False
             if plate[0:2].isalpha() and 1 < len(plate) < 7:
-                """
-                if len(plate) == 6:
-                    if plate[3:5].isdigit() and plate[6].isalpha():
-                        print(plate[2].isdigit())
-                        print(plate[3].isdigit())
-                        return False
-                    else:
-                        return True
-                if len(plate) < 6:
-                    if plate[2].isdigit():
-                        print(plate[2].isdigit())
-                        return False
-
-                    else:
-                        return True
-                """
+                return middle(plate)
             else:
                 return False
 
