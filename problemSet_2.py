@@ -8,7 +8,7 @@ Source: https://cs50.harvard.edu/python/2022/psets/2
 2. Coke Machine
 3. Just setting up my twttr
 4. Vanity Plates
-5. Meal Time
+5. Nutrition Facts
 """
 
 try:
@@ -60,7 +60,7 @@ try:
 
         pickProblem()
 
-    # 3. Vanity Plates
+    # 4. Vanity Plates
     def plates():
         userInput = input("Plate: ")
 
@@ -103,6 +103,25 @@ try:
 
         pickProblem()
 
+    # 5. Nutrition Facts
+    def nutrition():
+        userInput = input("Item: ")
+        fruits = [
+            {"fruit": "Apple", "cal": "130"},
+            {"fruit": "Banana", "cal": "110"},
+            {"fruit": "Lemon", "cal": "15"},
+            {"fruit": "Peach", "cal": "60"},
+            {"fruit": "Strawberries", "cal": "50"},
+            {"fruit": "Pineapple", "cal": "50"},
+        ]
+
+        for fruit in fruits:
+            if fruit["fruit"] == userInput:
+                print("Calories:", fruit["cal"])
+        print("\n")
+
+        pickProblem()
+
     # problemSet_2.py
     def pickProblem():
         problemSet = [
@@ -114,7 +133,7 @@ try:
                     "2. Coke Machine",
                     "3. Just setting up my twttr",
                     "4. Vanity Plates",
-                    "5. Meal Time",
+                    "5. Nutrition Facts",
                     "None, just quit()",
                 ],
             ),
@@ -137,8 +156,9 @@ try:
                 print("Vanity Plates:")
                 plates()
 
-            case {"problem": "5. Meal Time"}:
-                print("Meal Time:")
+            case {"problem": "5. Nutrition Facts"}:
+                print("Nutrition Facts:")
+                nutrition()
 
             case {"problem": "None, just quit()"}:
                 sys.exit("Bye!")
