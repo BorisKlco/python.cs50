@@ -82,6 +82,34 @@ try:
                 return pickProblem()
 
     # 4. Outdated
+    def outdated():
+        months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ]
+        userInput = input("date: ")
+        numberDate = userInput.split("/")
+        writtenDate = userInput.split(",")
+        findingMonth = writtenDate[0].split(" ")
+        if (findingMonth[0] in months) and (int(findingMonth[1]) < 32):
+            print(
+                f"{int(writtenDate[1])}-{int(months.index(findingMonth[0]) + 1):02}-{int(findingMonth[1]):02}"
+            )
+        elif len(numberDate) == 3 and int(numberDate[1]) < 32:
+            print(f"{numberDate[2]}-{int(numberDate[0]):02}-{int(numberDate[1]):02}")
+        else:
+            print("Out of range\n")
+            pickProblem()
 
     # problemSet_3.py
     def pickProblem():
@@ -114,6 +142,7 @@ try:
 
             case {"problem": "4. Outdated"}:
                 print("Outdated:")
+                outdated()
 
             case {"problem": "None, just quit()"}:
                 sys.exit("Bye!")
