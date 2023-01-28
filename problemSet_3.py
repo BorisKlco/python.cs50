@@ -59,6 +59,27 @@ try:
         pickProblem()
 
     # 3. Grocery List
+    def list():
+        list = {}
+        while True:
+            try:
+                userInput = input()
+                userInput = userInput.strip().upper()
+                if userInput.isalpha():
+                    if userInput not in list:
+                        list[userInput] = 1
+                    else:
+                        add = list[userInput] + 1
+                        list[userInput] = add
+            except KeyError:
+                print("\n")
+                return pickProblem()
+            except EOFError:
+                print("\n")
+                for item in list:
+                    print(list[item], item)
+                print("\n")
+                return pickProblem()
 
     # 4. Outdated
 
@@ -89,6 +110,7 @@ try:
 
             case {"problem": "3. Grocery List"}:
                 print("Grocery List:")
+                list()
 
             case {"problem": "4. Outdated"}:
                 print("Outdated:")
