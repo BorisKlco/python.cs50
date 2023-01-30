@@ -39,6 +39,30 @@ try:
         else:
             print("Something WoOoOng?!")
 
+    # 3. Adieu
+    def adieu():
+        namesList = []
+
+        def insertName(name, names):
+            nameList = names
+            nameList.append(name)
+            return nameList
+
+        while True:
+            try:
+                userInput = input("\nName: ")
+                if userInput != "":
+                    insertName(userInput, namesList)
+                    print(namesList)
+            except EOFError:
+                print("\nAdieu, adieu, to", end="")
+                for name in namesList[:-2]:
+                    print(f" {name},", end="")
+                print(f" {namesList[len(namesList) - 2]}", end="")
+                if len(namesList) > 1:
+                    print(" and", namesList[len(namesList) - 1])
+                namesList = []
+
     # problemSet_4.py
     def pickProblem():
         problemSet = [
@@ -68,6 +92,7 @@ try:
 
             case {"problem": "3. Adieu"}:
                 print("Adieu:")
+                adieu()
 
             case {"problem": "4. Guessing"}:
                 print("Guessing:")
