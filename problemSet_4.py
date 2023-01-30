@@ -3,6 +3,7 @@ import sys
 import emoji
 from pyfiglet import Figlet
 import random
+import requests
 
 """
 Source: https://cs50.harvard.edu/python/2022/psets/3
@@ -84,6 +85,72 @@ try:
             except:
                 print("Guess must be number")
 
+    # 5.Little Proffesor
+    def proffesor():
+        def getLvl():
+            while True:
+                try:
+                    selectLvl = input("Select Level 1-3: ")
+                    if int(selectLvl) in range(1, 4):
+                        return selectLvl
+                    else:
+                        print("Wrong level")
+                except:
+                    print("Wrong level")
+
+        def generateProblem(level):
+            if level == "1":
+                return random.randint(0, 9)
+            elif level == "2":
+                return random.randint(10, 99)
+            else:
+                return random.randint(100, 999)
+
+        def calculation(a, b):
+            hp = 3
+            while hp > 0:
+                userInput = input(f"{a} + {b} = ")
+                if int(userInput) == (a + b):
+                    if hp == 3:
+                        return 1
+                    else:
+                        return 0
+                else:
+                    print("EEE")
+                    hp -= 1
+            else:
+                print(f"{a} + {b} = {a+b}")
+                return 0
+
+        level = getLvl()
+        score = 0
+        round = 0
+        while round < 10:
+            a = generateProblem(level)
+            b = generateProblem(level)
+            score = score + calculation(a, b)
+            round += 1
+        else:
+            print(f"Score: {score}")
+
+    # 6. Bitcoin Price Index
+    def btc():
+        try:
+            if sys.argv[1].replace(".", "", 1).isdigit():
+                try:
+                    req = requests.get(
+                        "https://api.coindesk.com/v1/bpi/currentprice.json"
+                    )
+                    res = req.json()
+                    btc = res["bpi"]["USD"]["rate_float"]
+                    print(f"${round(float(btc) * float(sys.argv[1]), 2)}")
+                except requests.RequestException:
+                    print("something")
+            else:
+                print("not a numb")
+        except:
+            print("asd")
+
     # problemSet_4.py
     def pickProblem():
         problemSet = [
@@ -121,9 +188,11 @@ try:
 
             case {"problem": "5. Professor"}:
                 print("Professor:")
+                proffesor()
 
             case {"problem": "6. Bitcoin"}:
                 print("Bitcoin:")
+                btc()
 
             case {"problem": "None, just quit()"}:
                 sys.exit("Bye!")
