@@ -63,6 +63,27 @@ try:
                     print(" and", namesList[len(namesList) - 1])
                 namesList = []
 
+    # 4. Guessing Game
+    def game():
+        gameNumber = random.randint(0, 100)
+        while True:
+            userInput = input("Guess: ")
+            try:
+                userNumber = int(userInput)
+                if userNumber in range(0, 100):
+                    print(gameNumber)
+                    if userNumber < gameNumber:
+                        print("Too small")
+                    elif userNumber > gameNumber:
+                        print("Too big")
+                    else:
+                        print("Right!")
+                        return False
+                else:
+                    print("Guess must be 0-100")
+            except:
+                print("Guess must be number")
+
     # problemSet_4.py
     def pickProblem():
         problemSet = [
@@ -96,6 +117,7 @@ try:
 
             case {"problem": "4. Guessing"}:
                 print("Guessing:")
+                game()
 
             case {"problem": "5. Professor"}:
                 print("Professor:")
