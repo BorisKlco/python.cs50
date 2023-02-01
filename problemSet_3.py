@@ -19,9 +19,9 @@ try:
 
         try:
             gauge = int(fraction[0]) / int(fraction[1]) * 100
-            if gauge == 99:
+            if 100 >= gauge > 99:
                 print("F")
-            elif gauge == 1:
+            elif 0 <= gauge < 1:
                 print("E")
             elif gauge == 25 or gauge == 50 or gauge == 75:
                 print(f"{int(gauge)}%\n")
