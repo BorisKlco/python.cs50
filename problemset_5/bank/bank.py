@@ -13,6 +13,5 @@ def helloBank(greeting):
     else:
         return f"$100"
         
-
 if __name__ == "__main__":
     main()
