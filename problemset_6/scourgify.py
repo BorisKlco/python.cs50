@@ -1,21 +1,35 @@
 import sys
 import csv
 
-def pythonFile():
-    if len(sys.argv) == 1:
-        return f'not arg'
-    elif len(sys.argv) > 2:
-        return f'too many arg'
+
+def arg():
+    if len(sys.argv) < 3:
+        return f"No arg"
+    elif len(sys.argv) > 3:
+        return f"Too many arg"
     else:
-        try:
-            if sys.argv[1].endswith(".csv"):
-                return pizza(sys.argv[1])
-            elif sys.argv[1].endswith(".txt"):
-                return f'Not a CSV file'
-            else:
-                return pizza(f"{sys.argv[1]}.csv")
-        except:
-            return f'Not a CSV file'
+        return csvSort(sys.argv[1], sys.argv[2])
 
 
-print(pythonFile())
+def csvSort(before, after):
+    try:
+        with open(before) as beforeFile:
+            split = []
+            reader = csv.DictReader(beforeFile)
+            for row in reader:
+                split.append({"name": row["name"], "house": row["house"]})
+
+        with open(after, "a") as afterFile:
+            writer = csv.DictWriter(afterFile, fieldnames=["first", "last", "house"])
+            writer.writeheader()
+            for name in split:
+                last, first = name["name"].split(",")
+                writer.writerow(
+                    {"first": first.lstrip(), "last": last, "house": name["house"]}
+                )
+
+    except:
+        return f"file doesnt exist"
+
+
+arg()
